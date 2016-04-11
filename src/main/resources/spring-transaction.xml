@@ -16,7 +16,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <tx:advice id="txAd vice" transaction-manager="transactionManager">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="get*" read-only="true" propagation="SUPPORTS"/>
             <tx:method name="find*" read-only="true" propagation="SUPPORTS" no-rollback-for="java.lang.RuntimeException"/>

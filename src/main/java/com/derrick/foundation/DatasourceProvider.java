@@ -16,7 +16,7 @@ public class DatasourceProvider {
             throw new NullPointerException();
         }
         contextHolder.set(dataSourceType);
-        LOG.debug("dataSourceType:" + dataSourceType);
+        LOG.info("dataSourceType:" + dataSourceType);
     }
 
     public static DataSourceType getDataSourceType() {

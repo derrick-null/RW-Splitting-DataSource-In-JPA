@@ -19,27 +19,12 @@ public class DemoService {
 
     @Transactional
     public void save(Demo entity){
-        try{
-            DatasourceProvider.setDataSourceType(DataSourceType.WRITE_ONLY);
-            demoRepository.save(entity);
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            DatasourceProvider.clearDataSourceType();
-        }
+        demoRepository.save(entity);
     }
 
     @Transactional(readOnly = true)
     public Demo find(Long id){
-        Demo demo = null;
-        try{
-            DatasourceProvider.setDataSourceType(DataSourceType.READ_ONLY);
-            demo = demoRepository.findOne(id);
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-            DatasourceProvider.clearDataSourceType();
-        }
+        Demo demo = demoRepository.findOne(id);
         return demo;
     }
 

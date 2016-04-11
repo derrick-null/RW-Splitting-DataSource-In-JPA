@@ -7,6 +7,25 @@
 
  						   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<aop:aspectj-autoproxy />
-
+    <bean id="dataSourceRouterInterceptor" class="com.derrick.foundation.DataSourceRouterInterceptor">
+        <property name="methodNamePrefixes">
+            <list>
+                <value>get</value>
+                <value>load</value>
+                <value>fetch</value>
+                <value>find</value>
+                <value>query</value>
+                <value>is</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config>
+        <aop:aspect ref="dataSourceRouterInterceptor">
+            <aop:pointcut expression="execution(* com.derrick.*..service..*Service+.*(..))"
+                          id="dataSourceRouterPointCut" />
+            <aop:after method="after" pointcut-ref="dataSourceRouterPointCut" />
+            <aop:before method="before" pointcut-ref="dataSourceRouterPointCut" />
+        </aop:aspect>
+    </aop:config>
 
 </beans>
